@@ -6,13 +6,13 @@ const imagePath = './image.gif'
 const framesPath = './frames/frame-%d.png'
 const extract = async (input, output) => await extractFrames({ input, output })
 
-const setFrameAsWallpaper = async (i, frames) => {
-	const currentFrame = output.replace('%d', i)
+const setFrameAsWallpaper = async (i, frames, path) => {
+	const currentFrame = path.replace('%d', i)
 	await wallpaper.set(currentFrame)
 	i = i >= frames - 1 ? 0 : i + 1
-	setTimeout(() => { setFrameAsWallpaper(i, frames) }, 1000 / FRAME_RATE)
+	setTimeout(() => { setFrameAsWallpaper(i, frames, path) }, 1000 / FRAME_RATE)
 }
 
 extract(imagePath, framesPath)
-	.then(({ shape }) => setFrameAsWallpaper(0, shape[0]))
+	.then(({ shape }) => setFrameAsWallpaper(0, shape[0], framesPath))
 	.catch(err => console.log(err))
