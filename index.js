@@ -2,19 +2,18 @@ const wallpaper = require('wallpaper')
 const extractFrames = require('gif-extract-frames')
 
 const FRAME_RATE = 15
-const imagePath = './image.gif'
-const framesPath = './frames/frame-%d.png'
-const extract = async (input, output) => await extractFrames({ input, output })
+const input = './image.gif'
+const output = './frames/frame-%d.png'
 
-const setFrameAsWallpaper = async (i, frames, path) => {
-	const currentFrame = path.replace('%d', i)
+const setFrameAsWallpaper = async (i, frames) => {
+	const currentFrame = output.replace('%d', i)
 	await wallpaper.set(currentFrame)
 	i = i >= frames - 1 ? 0 : i + 1
-	setTimeout(() => { setFrameAsWallpaper(i, frames, path) }, 1000 / FRAME_RATE)
+	setTimeout(() => { setFrameAsWallpaper(i, frames) }, 1000 / FRAME_RATE)
 }
 
 (async () => {
-	const { shape } = await extract(imagePath, framesPath)
-	setFrameAsWallpaper(0, shape[0], framesPath)
+	const { shape } = await extractFrames({ input, output })
+	setFrameAsWallpaper(0, shape[0])
 })()
 
