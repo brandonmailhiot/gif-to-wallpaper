@@ -13,6 +13,8 @@ const setFrameAsWallpaper = async (i, frames, path) => {
 	setTimeout(() => { setFrameAsWallpaper(i, frames, path) }, 1000 / FRAME_RATE)
 }
 
-extract(imagePath, framesPath)
-	.then(({ shape }) => setFrameAsWallpaper(0, shape[0], framesPath))
-	.catch(err => console.log(err))
+(async () => {
+	const { shape } = await extract(imagePath, framesPath)
+	setFrameAsWallpaper(0, shape[0], framesPath)
+})()
+
