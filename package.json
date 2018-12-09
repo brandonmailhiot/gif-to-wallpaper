@@ -1,0 +1,15 @@
+{
+  "name": "moving_wallpaper",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "gif-extract-frames": "^1.0.2",
+    "wallpaper": "^4.1.0"
+  }
+}
